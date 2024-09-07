@@ -11,15 +11,18 @@ import React from 'react';
 import {Logout, SearchNormal1} from 'iconsax-react-native';
 import JobCard from './components/JobCard';
 import {useFetchJobList} from '../../../services/job/useJobListMutation';
+import {useAuthStore} from '../../../store/authStore';
 
 export function JobList() {
   const {data, error} = useFetchJobList();
-  console.log(data?.data);
+  const clearTokens = useAuthStore(state => state.clearTokens);
 
   return (
     <SafeAreaView className="bg-white-100 flex-1">
       <View className="flex-row justify-between mb-5 m-5">
-        <TouchableOpacity style={{transform: [{rotate: '-135deg'}]}}>
+        <TouchableOpacity
+          onPress={() => clearTokens()}
+          style={{transform: [{rotate: '-135deg'}]}}>
           <Logout size="30" color="#000000" />
         </TouchableOpacity>
         <Text className="text-xl text-black-900 font-semibold">Job List</Text>

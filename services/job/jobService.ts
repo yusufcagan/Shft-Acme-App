@@ -22,7 +22,7 @@ export type JobResponse = {
 };
 
 export const jobList = async (): Promise<JobResponse> => {
-  const token = useAuthStore.getState().token;
+  const token = useAuthStore.getState().accessToken;
   const response = await apiClient.get('/api/jobs', {
     headers: {
       Authorization: `Bearer ${token}`,

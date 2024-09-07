@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {Login} from './screens/auth/Login';
@@ -20,8 +20,8 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App(): React.JSX.Element {
-  const token = useAuthStore.getState().accessToken;
-  console.log(token);
+  const token = useAuthStore(state => state.accessToken);
+
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
