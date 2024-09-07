@@ -15,6 +15,9 @@ import {CreateAccount} from './screens/auth/CreateAccount';
 import {JobList} from './screens/jobs/JobListing';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {useAuthStore} from './store/authStore';
+import {JobStack} from './screens/jobs/JobStack';
+import {AppliedJobScreen} from './screens/jobs/AppliedJobs';
+import ProfileScreen from './screens/profile';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -28,7 +31,9 @@ function App(): React.JSX.Element {
       <NavigationContainer>
         {token ? (
           <Tab.Navigator screenOptions={{headerShown: false}}>
-            <Tab.Screen name="JobList" component={JobList} />
+            <Tab.Screen name="JobStack" component={JobStack} />
+            <Tab.Screen name="AppliedJobScreen" component={AppliedJobScreen} />
+            <Tab.Screen name="ProfileScreen" component={ProfileScreen} />
           </Tab.Navigator>
         ) : (
           <Stack.Navigator screenOptions={{headerShown: false}}>

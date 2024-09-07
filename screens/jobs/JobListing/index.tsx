@@ -37,6 +37,7 @@ export function JobList() {
       <FlatList
         data={data?.data}
         renderItem={({item: job}) => <JobCard job={job} />}
+        keyExtractor={item => String(item.id!)}
       />
     </SafeAreaView>
   );
