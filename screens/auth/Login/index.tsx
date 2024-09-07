@@ -6,11 +6,17 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
-import {Controller, useForm} from 'react-hook-form';
-import {useNavigation} from '@react-navigation/native';
+import {Controller, SubmitHandler, useForm} from 'react-hook-form';
 import {RootStackParamList} from '../../../RootStackParamList';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {useLoginMutation} from '../../../services/auth/useLoginMutation';
+import {useAuthStore} from '../../../store/authStore';
+import {JobList} from '../../jobs/JobListing';
 
+type LoginFormInput = {
+  email: string;
+  password: string;
+};
 export function Login({
   navigation,
 }: NativeStackScreenProps<RootStackParamList>) {
@@ -18,10 +24,19 @@ export function Login({
     control,
     handleSubmit,
     formState: {errors},
-  } = useForm();
+  } = useForm<LoginFormInput>();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const {mutate, isError, isSuccess} = useLoginMutation();
+  const setToken = useAuthStore(state => state.setToken);
+
+  const onSubmit: SubmitHandler<LoginFormInput> = data => {
+    mutate(data, {
+      onSuccess: data => {
+        console.log('login succes:', data.accessToken);
+        setToken(data.accessToken);
+        navigation.navigate('JobList');
+      },
+    });
   };
 
   return (
@@ -95,6 +110,11 @@ export function Login({
           className="bg-black py-3 rounded-md mb-4">
           <Text className="text-white text-center text-lg">Login</Text>
         </TouchableOpacity>
+        {isError && (
+          <Text className="text-red-500 mt-2">
+            Login failed. Please try again.
+          </Text>
+        )}
 
         {/* Create Account */}
         <View className="flex-row justify-center items-center mb-4 mt-4">
