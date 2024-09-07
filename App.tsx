@@ -20,7 +20,7 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App(): React.JSX.Element {
-  const token = useAuthStore.getState().token;
+  const token = useAuthStore.getState().accessToken;
   console.log(token);
   const queryClient = new QueryClient();
   return (

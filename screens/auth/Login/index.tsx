@@ -10,8 +10,6 @@ import {Controller, SubmitHandler, useForm} from 'react-hook-form';
 import {RootStackParamList} from '../../../RootStackParamList';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useLoginMutation} from '../../../services/auth/useLoginMutation';
-import {useAuthStore} from '../../../store/authStore';
-
 type LoginFormInput = {
   email: string;
   password: string;
@@ -26,13 +24,12 @@ export function Login({
   } = useForm<LoginFormInput>();
 
   const {mutate, isError, isSuccess} = useLoginMutation();
-  const setToken = useAuthStore(state => state.setToken);
 
   const onSubmit: SubmitHandler<LoginFormInput> = data => {
     mutate(data, {
       onSuccess: data => {
         console.log('login succes:', data.accessToken);
-        setToken(data.accessToken);
+        // setToken(data.accessToken);
       },
     });
   };
