@@ -11,7 +11,6 @@ import {RootStackParamList} from '../../../RootStackParamList';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useLoginMutation} from '../../../services/auth/useLoginMutation';
 import {useAuthStore} from '../../../store/authStore';
-import {JobList} from '../../jobs/JobListing';
 
 type LoginFormInput = {
   email: string;
@@ -34,7 +33,6 @@ export function Login({
       onSuccess: data => {
         console.log('login succes:', data.accessToken);
         setToken(data.accessToken);
-        navigation.navigate('JobList');
       },
     });
   };
@@ -42,10 +40,10 @@ export function Login({
   return (
     <SafeAreaView className="bg-white-100 flex-1 justify-center">
       <View className="m-5">
-        <Text className="font-poppins mt-2 text-4xl text-black-900 font-semibold">
+        <Text className="mt-2 text-4xl text-black-900 font-semibold">
           Welcome,
         </Text>
-        <Text className="font-poppins mt-1 text-5xl text-black-900 font-semibold">
+        <Text className="mt-1 text-5xl text-black-900 font-semibold">
           ACME APP
         </Text>
         {/* Email component */}
