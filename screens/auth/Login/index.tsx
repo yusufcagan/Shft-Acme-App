@@ -9,7 +9,7 @@ import React from 'react';
 import {Controller, SubmitHandler, useForm} from 'react-hook-form';
 import {RootStackParamList} from '../../../RootStackParamList';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {useLoginMutation} from '../../../services/auth/useLoginMutation';
+import {useLoginMutation} from '../../../services/queries/useLoginMutation';
 type LoginFormInput = {
   email: string;
   password: string;

@@ -1,7 +1,7 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {Bag2} from 'iconsax-react-native';
-import {Job} from '../../../../services/job/jobService';
+import {Job} from '../../../../services/jobService';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {JobStackParamList} from '../../../../RootStackParamList';
 

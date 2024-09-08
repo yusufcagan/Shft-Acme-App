@@ -3,7 +3,7 @@ import React from 'react';
 import {Bag2} from 'iconsax-react-native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {JobStackParamList} from '../RootStackParamList';
-import {useGetJobById} from '../services/job/useGetJobById';
+import {useGetJobById} from '../services/queries/useGetJobById';
 
 type props = {
   id: string;

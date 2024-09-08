@@ -10,7 +10,7 @@ import {
 import React from 'react';
 import {Logout, SearchNormal1} from 'iconsax-react-native';
 import JobCard from './components/JobCard';
-import {useGetJobList} from '../../../services/job/useGetJobList';
+import {useGetJobList} from '../../../services/queries/useGetJobList';
 import {useAuthStore} from '../../../store/authStore';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {JobStackParamList} from '../../../RootStackParamList';

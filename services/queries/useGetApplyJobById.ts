@@ -1,5 +1,5 @@
 import {useQuery} from '@tanstack/react-query';
-import {Job, applyJobById} from './jobService';
+import {applyJobById, Job} from '../jobService';
 
 export const useGetApllyJobById = (id: string | undefined) => {
   return useQuery<Job, Error>({

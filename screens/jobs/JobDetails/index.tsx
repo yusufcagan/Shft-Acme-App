@@ -3,7 +3,7 @@ import React from 'react';
 import {ArrowLeft, Bag2} from 'iconsax-react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {JobStackParamList} from '../../../RootStackParamList';
-import {useGetJobById} from '../../../services/job/useGetJobById';
+import {useGetJobById} from '../../../services/queries/useGetJobById';
 
 export function JobDetailScreen({
   navigation,

@@ -6,10 +6,9 @@ import {
   TextInput,
 } from 'react-native';
 import React from 'react';
-import {useGetUser} from '../../services/user/useGetUser';
+import {useGetUser} from '../../services/queries/useGetUser';
 import {Logout} from 'iconsax-react-native';
 import {useAuthStore} from '../../store/authStore';
-import {UserResponse} from '../../services/user/userService';
 import {Controller, useForm} from 'react-hook-form';
 
 type updateUserResponse = {

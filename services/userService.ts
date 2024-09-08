@@ -1,5 +1,5 @@
-import {useAuthStore} from '../../store/authStore';
-import apiClient from '../apiClient';
+import {useAuthStore} from '../store/authStore';
+import apiClient from './apiClient';
 
 export type Address = {
   details: string;
