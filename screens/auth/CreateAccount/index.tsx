@@ -4,12 +4,19 @@ import {
   SafeAreaView,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import React from 'react';
-import {Controller, useForm} from 'react-hook-form';
+import {Controller, SubmitHandler, useForm} from 'react-hook-form';
 import {RootStackParamList} from '../../../RootStackParamList';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {ArrowLeft} from 'iconsax-react-native';
+import {useRegisterMutation} from '../../../services/queries/useRegisterMutation';
+
+type RegisterInput = {
+  email: string;
+  password: string;
+};
 
 export function CreateAccount({
   navigation,
@@ -18,10 +25,37 @@ export function CreateAccount({
     control,
     handleSubmit,
     formState: {errors},
-  } = useForm();
+  } = useForm<RegisterInput>();
 
-  const onSubmit = (data: any) => {
+  const {mutateAsync} = useRegisterMutation();
+
+  const onSubmit: SubmitHandler<RegisterInput> = data => {
     console.log(data);
+    mutateAsync(data, {
+      onSuccess: () => {
+        Alert.alert(
+          'Kayıt Başarılı',
+          'Üyelik oluşturuldu, şimdi giriş yapabilirsiniz.',
+          [
+            {
+              text: 'Tamam',
+              onPress: () => {
+                navigation.navigate('Login');
+              },
+            },
+          ],
+          {cancelable: false},
+        );
+      },
+      onError: () => {
+        Alert.alert(
+          'Kayıt Başarısız',
+          `Kayıt işlemi sırasında bir hata oluştu, lütfen tekrar deneyin.--`,
+          [{text: 'Tamam'}],
+          {cancelable: false},
+        );
+      },
+    });
   };
 
   return (
@@ -60,9 +94,6 @@ export function CreateAccount({
             name="email"
             defaultValue=""
           />
-          {errors.email && (
-            <Text className="text-red-500 mt-1">This is required.</Text>
-          )}
         </View>
 
         {/* Password Field */}
@@ -86,13 +117,12 @@ export function CreateAccount({
             name="password"
             defaultValue=""
           />
-          {errors.password && (
-            <Text className="text-red-500 mt-1">Password is required.</Text>
-          )}
         </View>
 
         {/* Login Button */}
-        <TouchableOpacity className="bg-black py-3 rounded-md mb-4">
+        <TouchableOpacity
+          onPress={handleSubmit(onSubmit)}
+          className="bg-black py-3 rounded-md mb-4">
           <Text className="text-white text-center text-lg">Sign up</Text>
         </TouchableOpacity>
       </View>

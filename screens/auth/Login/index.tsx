@@ -10,10 +10,12 @@ import {Controller, SubmitHandler, useForm} from 'react-hook-form';
 import {RootStackParamList} from '../../../RootStackParamList';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useLoginMutation} from '../../../services/queries/useLoginMutation';
+
 type LoginFormInput = {
   email: string;
   password: string;
 };
+
 export function Login({
   navigation,
 }: NativeStackScreenProps<RootStackParamList>) {
@@ -23,13 +25,12 @@ export function Login({
     formState: {errors},
   } = useForm<LoginFormInput>();
 
-  const {mutate, isError, isSuccess} = useLoginMutation();
+  const {mutateAsync, isError} = useLoginMutation();
 
   const onSubmit: SubmitHandler<LoginFormInput> = data => {
-    mutate(data, {
-      onSuccess: data => {
-        console.log('login succes:', data.accessToken);
-        // setToken(data.accessToken);
+    mutateAsync(data, {
+      onSuccess: () => {
+        console.log('login success:');
       },
     });
   };

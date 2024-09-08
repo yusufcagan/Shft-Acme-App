@@ -13,6 +13,6 @@ export const login = async (email: string, password: string) => {
 };
 
 export const register = async (email: string, password: string) => {
-  const response = await apiClient.post('/register', {email, password});
+  const response = await apiClient.post('/api/register', {email, password});
   return response.data;
 };
