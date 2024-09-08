@@ -12,8 +12,12 @@ import {Logout, SearchNormal1} from 'iconsax-react-native';
 import JobCard from './components/JobCard';
 import {useFetchJobList} from '../../../services/job/useJobListMutation';
 import {useAuthStore} from '../../../store/authStore';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {JobStackParamList} from '../../../RootStackParamList';
 
-export function JobList() {
+export function JobList({
+  navigation,
+}: NativeStackScreenProps<JobStackParamList, 'JobList'>) {
   const {data, error} = useFetchJobList();
   const clearTokens = useAuthStore(state => state.clearTokens);
 
@@ -36,7 +40,9 @@ export function JobList() {
       </View>
       <FlatList
         data={data?.data}
-        renderItem={({item: job}) => <JobCard job={job} />}
+        renderItem={({item: job}) => (
+          <JobCard job={job} navigation={navigation} />
+        )}
         keyExtractor={item => String(item.id!)}
       />
     </SafeAreaView>

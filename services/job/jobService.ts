@@ -30,3 +30,23 @@ export const jobList = async (): Promise<JobResponse> => {
   });
   return response.data;
 };
+
+export const jobById = async (id: string | undefined): Promise<Job> => {
+  const token = useAuthStore.getState().accessToken;
+  const response = await apiClient.get(`/api/jobs/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
+
+export const applyJobById = async (id: string | undefined): Promise<Job> => {
+  const token = useAuthStore.getState().accessToken;
+  const response = await apiClient.get(`/api/jobs/${id}/apply`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
