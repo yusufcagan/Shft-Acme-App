@@ -4,9 +4,9 @@ export type RootStackParamList = {
 };
 
 export type BottomTabParamList = {
-  JobStac: undefined;
+  JobStack: undefined;
   AppliedJobScreen: undefined;
-  ProgileScreen: undefined;
+  ProfileScreen: undefined;
 };
 
 export type JobStackParamList = {
