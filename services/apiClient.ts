@@ -35,6 +35,9 @@ apiClient.interceptors.response.use(
           {refreshToken},
         );
 
+        await AsyncStorage.setItem('accessToken', data.accessToken);
+        await AsyncStorage.setItem('refreshToken', data.refreshToken);
+
         const setTokens = useAuthStore.getState().setTokens;
         setTokens(data.accessToken, data.refreshToken);
 
