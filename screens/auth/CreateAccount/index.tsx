@@ -92,9 +92,7 @@ export function CreateAccount({
         </View>
 
         {/* Login Button */}
-        <TouchableOpacity
-          onPress={() => navigation.navigate('JobList')}
-          className="bg-black py-3 rounded-md mb-4">
+        <TouchableOpacity className="bg-black py-3 rounded-md mb-4">
           <Text className="text-white text-center text-lg">Sign up</Text>
         </TouchableOpacity>
       </View>
