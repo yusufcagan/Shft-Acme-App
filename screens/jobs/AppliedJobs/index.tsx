@@ -1,13 +1,32 @@
-import {View, Text, SafeAreaView} from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
 import React from 'react';
 import {useGetUser} from '../../../services/user/useGetUser';
+import JobCard from '../../../components/JobCard';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {JobStackParamList} from '../../../RootStackParamList';
 
-export function AppliedJobScreen() {
+export function AppliedJobScreen({
+  navigation,
+}: NativeStackScreenProps<JobStackParamList, 'AppliedJobScreen'>) {
   const {data: user} = useGetUser();
   console.log(user);
   return (
-    <SafeAreaView>
-      <Text>index</Text>
+    <SafeAreaView className="flex-1">
+      <View className="flex-row self-center mb-5 m-5">
+        <Text className="text-xl text-black-900 font-semibold">
+          Applied Jobs
+        </Text>
+      </View>
+      <FlatList
+        data={user?.appliedJobs}
+        renderItem={({item: id}) => <JobCard id={id} navigation={navigation} />}
+      />
     </SafeAreaView>
   );
 }

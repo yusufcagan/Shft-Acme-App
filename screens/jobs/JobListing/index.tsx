@@ -10,7 +10,7 @@ import {
 import React from 'react';
 import {Logout, SearchNormal1} from 'iconsax-react-native';
 import JobCard from './components/JobCard';
-import {useFetchJobList} from '../../../services/job/useJobListMutation';
+import {useGetJobList} from '../../../services/job/useGetJobList';
 import {useAuthStore} from '../../../store/authStore';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {JobStackParamList} from '../../../RootStackParamList';
@@ -18,7 +18,7 @@ import {JobStackParamList} from '../../../RootStackParamList';
 export function JobList({
   navigation,
 }: NativeStackScreenProps<JobStackParamList, 'JobList'>) {
-  const {data, error} = useFetchJobList();
+  const {data, error} = useGetJobList();
   const clearTokens = useAuthStore(state => state.clearTokens);
 
   return (

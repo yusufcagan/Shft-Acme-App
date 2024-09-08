@@ -2,21 +2,22 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {Bag2} from 'iconsax-react-native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {Job} from '../services/job/jobService';
 import {JobStackParamList} from '../RootStackParamList';
+import {useGetJobById} from '../services/job/useGetJobById';
 
 type props = {
-  job: Job;
+  id: string;
   navigation: NativeStackNavigationProp<
     JobStackParamList,
-    'JobList',
+    'AppliedJobScreen',
     undefined
   >;
 };
-const JobCard = ({job, navigation}: props) => {
+const JobCard = ({id, navigation}: props) => {
+  const {data: job} = useGetJobById(id);
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('JobDetailScreen', {id: job.id})}
+      onPress={() => navigation.navigate('JobDetailScreen', {id: id})}
       className="bg-gray-300 rounded-2xl mx-5 my-4 p-2">
       <View className="flex-row items-center">
         <Bag2 size="40" color="#000000" />

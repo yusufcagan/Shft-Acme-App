@@ -3,14 +3,14 @@ import React from 'react';
 import {ArrowLeft, Bag2} from 'iconsax-react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {JobStackParamList} from '../../../RootStackParamList';
-import {useFetchJobById} from '../../../services/job/useFetchJobById';
+import {useGetJobById} from '../../../services/job/useGetJobById';
 
 export function JobDetailScreen({
   navigation,
   route,
 }: NativeStackScreenProps<JobStackParamList, 'JobDetailScreen'>) {
   const {id} = route.params;
-  const {data: job} = useFetchJobById(id);
+  const {data: job} = useGetJobById(id);
   return (
     <SafeAreaView className="flex-1">
       <View className="flex-row justify-between mb-5 m-5">

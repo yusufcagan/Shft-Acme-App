@@ -12,4 +12,5 @@ export type BottomTabParamList = {
 export type JobStackParamList = {
   JobList: undefined;
   JobDetailScreen: {id: string | undefined};
+  AppliedJobScreen: undefined;
 };
