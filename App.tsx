@@ -18,6 +18,7 @@ import {JobStack} from './screens/jobs/JobStack';
 import {AppliedJobScreen} from './screens/jobs/AppliedJobs';
 import ProfileScreen from './screens/profile';
 import {ActivityIndicator, SafeAreaView} from 'react-native';
+import {HambergerMenu, Profile} from 'iconsax-react-native';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -51,9 +52,31 @@ function App(): React.JSX.Element {
       <NavigationContainer>
         {token ? (
           <Tab.Navigator screenOptions={{headerShown: false}}>
-            <Tab.Screen name="JobStack" component={JobStack} />
-            <Tab.Screen name="AppliedJobScreen" component={AppliedJobScreen} />
-            <Tab.Screen name="ProfileScreen" component={ProfileScreen} />
+            <Tab.Screen
+              name="JobStack"
+              component={JobStack}
+              options={{
+                tabBarLabel: 'Job Listing',
+                tabBarIcon: ({focused}) => (
+                  <HambergerMenu size="24" color="#000000" />
+                ),
+              }}
+            />
+            <Tab.Screen
+              name="AppliedJobScreen"
+              component={AppliedJobScreen}
+              options={{tabBarLabel: 'Applied Jobs'}}
+            />
+            <Tab.Screen
+              name="ProfileScreen"
+              component={ProfileScreen}
+              options={{
+                tabBarLabel: 'Profile',
+                tabBarIcon: ({focused}) => (
+                  <Profile size="24" color="#000000" />
+                ),
+              }}
+            />
           </Tab.Navigator>
         ) : (
           <Stack.Navigator screenOptions={{headerShown: false}}>
