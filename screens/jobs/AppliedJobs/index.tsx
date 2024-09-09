@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import {useGetUser} from '../../../services/queries/useGetUser';
-import JobCard from '../../../components/JobCard';
+import JobCard from './components/JobCard';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {JobStackParamList} from '../../../RootStackParamList';
 

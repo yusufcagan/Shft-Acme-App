@@ -43,7 +43,7 @@ export const jobById = async (id: string | undefined): Promise<Job> => {
 
 export const applyJobById = async (id: string | undefined): Promise<Job> => {
   const token = useAuthStore.getState().accessToken;
-  const response = await apiClient.get(`/api/jobs/${id}/apply`, {
+  const response = await apiClient.post(`/api/jobs/${id}/apply`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

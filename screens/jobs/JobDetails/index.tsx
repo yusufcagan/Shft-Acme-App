@@ -4,6 +4,7 @@ import {ArrowLeft, Bag2} from 'iconsax-react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {JobStackParamList} from '../../../RootStackParamList';
 import {useGetJobById} from '../../../services/queries/useGetJobById';
+import {useApplyToJobById} from '../../../services/queries/useApplyToJobByIdMutation';
 
 export function JobDetailScreen({
   navigation,
@@ -11,6 +12,16 @@ export function JobDetailScreen({
 }: NativeStackScreenProps<JobStackParamList, 'JobDetailScreen'>) {
   const {id} = route.params;
   const {data: job} = useGetJobById(id);
+
+  const ApplyJob = useApplyToJobById();
+
+  const handleApplyJob = () => {
+    ApplyJob.mutateAsync(id, {
+      onSuccess: () => {
+        console.log('başarılı');
+      },
+    });
+  };
   return (
     <SafeAreaView className="flex-1">
       <View className="flex-row justify-between mb-5 m-5">
@@ -42,7 +53,9 @@ export function JobDetailScreen({
             {job?.description}
           </Text>
         </View>
-        <TouchableOpacity className="bg-black p-3 rounded-md mb-4 w-1/3 items-center">
+        <TouchableOpacity
+          onPress={handleApplyJob}
+          className="bg-black p-3 rounded-md mb-4 w-1/3 items-center">
           <Text className="text-white text-[17px] font-bold mx-2">Apply</Text>
         </TouchableOpacity>
       </View>
