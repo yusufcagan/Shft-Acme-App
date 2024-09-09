@@ -1,9 +1,10 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {Bag2} from 'iconsax-react-native';
+import {Bag2, TickSquare} from 'iconsax-react-native';
 import {Job} from '../../../../services/jobService';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {JobStackParamList} from '../../../../RootStackParamList';
+import {useGetUser} from '../../../../services/queries/useGetUser';
 
 type props = {
   job: Job;
@@ -14,6 +15,9 @@ type props = {
   >;
 };
 const JobCard = ({job, navigation}: props) => {
+  const {data: user} = useGetUser();
+  const appliedJobIds = new Set(user?.appliedJobs || []);
+
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('JobDetailScreen', {id: job.id})}
@@ -29,6 +33,11 @@ const JobCard = ({job, navigation}: props) => {
             {`Salary: ${job?.salary}$`}
           </Text>
         </View>
+        {appliedJobIds.has(job.id) && (
+          <View className="absolute right-0">
+            <TickSquare size="24" color="#000000" />
+          </View>
+        )}
       </View>
     </TouchableOpacity>
   );

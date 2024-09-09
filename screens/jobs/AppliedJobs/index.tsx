@@ -15,7 +15,6 @@ export function AppliedJobScreen({
   navigation,
 }: NativeStackScreenProps<JobStackParamList, 'AppliedJobScreen'>) {
   const {data: user} = useGetUser();
-  console.log(user);
   return (
     <SafeAreaView className="flex-1">
       <View className="flex-row self-center mb-5 m-5">

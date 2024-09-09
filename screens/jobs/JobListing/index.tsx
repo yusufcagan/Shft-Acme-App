@@ -2,7 +2,6 @@ import {
   View,
   Text,
   SafeAreaView,
-  Touchable,
   TouchableOpacity,
   TextInput,
   FlatList,
@@ -18,7 +17,7 @@ import {JobStackParamList} from '../../../RootStackParamList';
 export function JobList({
   navigation,
 }: NativeStackScreenProps<JobStackParamList, 'JobList'>) {
-  const {data, error} = useGetJobList();
+  const {data: jobData} = useGetJobList();
   const clearTokens = useAuthStore(state => state.clearTokens);
 
   return (
@@ -39,7 +38,7 @@ export function JobList({
         </View>
       </View>
       <FlatList
-        data={data?.data}
+        data={jobData?.data}
         renderItem={({item: job}) => (
           <JobCard job={job} navigation={navigation} />
         )}

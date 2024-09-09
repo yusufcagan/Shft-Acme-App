@@ -5,6 +5,7 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {JobStackParamList} from '../../../RootStackParamList';
 import {useGetJobById} from '../../../services/queries/useGetJobById';
 import {useApplyToJobById} from '../../../services/queries/useApplyToJobByIdMutation';
+import {useGetUser} from '../../../services/queries/useGetUser';
 
 export function JobDetailScreen({
   navigation,
@@ -13,12 +14,15 @@ export function JobDetailScreen({
   const {id} = route.params;
   const {data: job} = useGetJobById(id);
 
+  const {data: user} = useGetUser();
+  const appliedJobIds = new Set(user?.appliedJobs || []);
+
   const ApplyJob = useApplyToJobById();
 
   const handleApplyJob = () => {
     ApplyJob.mutateAsync(id, {
       onSuccess: () => {
-        console.log('başarılı');
+        console.log('success');
       },
     });
   };
@@ -53,11 +57,21 @@ export function JobDetailScreen({
             {job?.description}
           </Text>
         </View>
-        <TouchableOpacity
-          onPress={handleApplyJob}
-          className="bg-black p-3 rounded-md mb-4 w-1/3 items-center">
-          <Text className="text-white text-[17px] font-bold mx-2">Apply</Text>
-        </TouchableOpacity>
+        {appliedJobIds.has(job?.id!) ? (
+          <TouchableOpacity
+            onPress={handleApplyJob}
+            className="bg-white p-3 border-2 rounded-md mb-4 w-2/3 items-center">
+            <Text className="text-black text-[17px] font-bold mx-2">
+              Withdraw
+            </Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            onPress={handleApplyJob}
+            className="bg-black p-3 rounded-md mb-4 w-2/3 items-center">
+            <Text className="text-white text-[17px] font-bold mx-2">Apply</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </SafeAreaView>
   );
