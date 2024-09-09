@@ -49,13 +49,13 @@ apiClient.interceptors.response.use(
         } catch (refreshError) {
           console.error('Refresh token expired or invalid:', refreshError);
 
-          const clearTokens = useAuthStore(state => state.clearTokens);
+          const clearTokens = useAuthStore.getState().clearTokens;
           clearTokens();
 
           return Promise.reject(refreshError);
         }
       } else {
-        const clearTokens = useAuthStore(state => state.clearTokens);
+        const clearTokens = useAuthStore.getState().clearTokens;
         clearTokens();
         return Promise.reject(error);
       }
