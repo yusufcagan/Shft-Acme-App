@@ -27,6 +27,15 @@ export function JobDetailScreen({
         <Text className="text-[13px] text-black-900 font-semibold mt-2">{`Location: ${job?.location}`}</Text>
         <Text className="text-[13px] text-black-900 font-semibold mt-2">{`Salary: ${job?.salary}$`}</Text>
         <Text className="text-[15px] text-black-900 font-bold mt-2">{`Keyword:`}</Text>
+        <View className="flex-row flex-wrap mt-2">
+          {job?.keywords.map((j, index) => (
+            <View
+              key={index}
+              className="bg-white border-2 border-gray-800 p-1 ml-1">
+              <Text className="text-[15px] text-black-900 font-bold">{j}</Text>
+            </View>
+          ))}
+        </View>
         <Text className="text-[15px] text-black-900 font-bold mt-2">{`Job Description`}</Text>
         <View className="bg-white border-2 border-gray-800 p-2 m-4">
           <Text className="text-[15px] text-black-900 font-bold mt-2">
