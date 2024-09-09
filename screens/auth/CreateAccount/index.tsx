@@ -27,18 +27,17 @@ export function CreateAccount({
     formState: {errors},
   } = useForm<RegisterInput>();
 
-  const {mutateAsync} = useRegisterMutation();
+  const {mutate} = useRegisterMutation();
 
   const onSubmit: SubmitHandler<RegisterInput> = data => {
-    console.log(data);
-    mutateAsync(data, {
+    mutate(data, {
       onSuccess: () => {
         Alert.alert(
-          'Kayıt Başarılı',
-          'Üyelik oluşturuldu, şimdi giriş yapabilirsiniz.',
+          'Registration Successful',
+          'Your account has been created, you can now log in.',
           [
             {
-              text: 'Tamam',
+              text: 'Ok',
               onPress: () => {
                 navigation.navigate('Login');
               },
@@ -47,11 +46,11 @@ export function CreateAccount({
           {cancelable: false},
         );
       },
-      onError: () => {
+      onError: (error: any) => {
         Alert.alert(
-          'Kayıt Başarısız',
-          `Kayıt işlemi sırasında bir hata oluştu, lütfen tekrar deneyin.--`,
-          [{text: 'Tamam'}],
+          'Registration Failed.',
+          `An error occurred during registration, please try again. -"${error.response?.data?.message}"`,
+          [{text: 'Ok'}],
           {cancelable: false},
         );
       },
@@ -94,6 +93,9 @@ export function CreateAccount({
             name="email"
             defaultValue=""
           />
+          {errors.email && (
+            <Text className="text-red-500 mt-1">This is required.</Text>
+          )}
         </View>
 
         {/* Password Field */}
@@ -102,7 +104,11 @@ export function CreateAccount({
           <Controller
             control={control}
             rules={{
-              required: true,
+              required: 'Password is required',
+              minLength: {
+                value: 8,
+                message: 'Password must be at least 8 characters',
+              },
             }}
             render={({field: {onChange, onBlur, value}}) => (
               <TextInput
@@ -117,9 +123,12 @@ export function CreateAccount({
             name="password"
             defaultValue=""
           />
+          {errors.password && (
+            <Text className="text-red-500 mt-1">{errors.password.message}</Text>
+          )}
         </View>
 
-        {/* Login Button */}
+        {/* Sign Up Button */}
         <TouchableOpacity
           onPress={handleSubmit(onSubmit)}
           className="bg-black py-3 rounded-md mb-4">

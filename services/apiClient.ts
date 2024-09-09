@@ -30,21 +30,34 @@ apiClient.interceptors.response.use(
       const refreshToken = await AsyncStorage.getItem('refreshToken');
 
       if (refreshToken) {
-        const {data} = await axios.post(
-          'https://novel-project-ntj8t.ampt.app/api/refresh',
-          {refreshToken},
-        );
+        try {
+          const {data} = await axios.post(
+            'https://novel-project-ntj8t.ampt.app/api/refresh',
+            {refreshToken},
+          );
 
-        await AsyncStorage.setItem('accessToken', data.accessToken);
-        await AsyncStorage.setItem('refreshToken', data.refreshToken);
+          await AsyncStorage.setItem('accessToken', data.accessToken);
+          await AsyncStorage.setItem('refreshToken', data.refreshToken);
 
-        const setTokens = useAuthStore.getState().setTokens;
-        setTokens(data.accessToken, data.refreshToken);
+          const setTokens = useAuthStore.getState().setTokens;
+          setTokens(data.accessToken, data.refreshToken);
 
-        axios.defaults.headers.common[
-          'Authorization'
-        ] = `Bearer ${data.accessToken}`;
-        return apiClient(originalRequest);
+          axios.defaults.headers.common[
+            'Authorization'
+          ] = `Bearer ${data.accessToken}`;
+          return apiClient(originalRequest);
+        } catch (refreshError) {
+          console.error('Refresh token expired or invalid:', refreshError);
+
+          const clearTokens = useAuthStore(state => state.clearTokens);
+          clearTokens();
+
+          return Promise.reject(refreshError);
+        }
+      } else {
+        const clearTokens = useAuthStore(state => state.clearTokens);
+        clearTokens();
+        return Promise.reject(error);
       }
     }
 
