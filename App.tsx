@@ -19,6 +19,7 @@ import {AppliedJobScreen} from './screens/jobs/AppliedJobs';
 import ProfileScreen from './screens/profile';
 import {ActivityIndicator, SafeAreaView} from 'react-native';
 import {HambergerMenu, Profile} from 'iconsax-react-native';
+import SplashScreen from 'react-native-splash-screen';
 import './lang/i18n';
 import {useTranslation} from 'react-i18next';
 
@@ -42,6 +43,10 @@ function App(): React.JSX.Element {
 
     loadAppTokens();
   }, [loadTokens]);
+
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
 
   if (isloading) {
     return (
