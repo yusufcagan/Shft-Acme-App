@@ -19,11 +19,15 @@ import {AppliedJobScreen} from './screens/jobs/AppliedJobs';
 import ProfileScreen from './screens/profile';
 import {ActivityIndicator, SafeAreaView} from 'react-native';
 import {HambergerMenu, Profile} from 'iconsax-react-native';
+import './lang/i18n';
+import {useTranslation} from 'react-i18next';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App(): React.JSX.Element {
+  const {t} = useTranslation();
+
   const loadTokens = useAuthStore(state => state.loadTokens);
   const token = useAuthStore(state => state.accessToken);
   const [isloading, setIsLoading] = useState(true);
@@ -56,7 +60,7 @@ function App(): React.JSX.Element {
               name="JobStack"
               component={JobStack}
               options={{
-                tabBarLabel: 'Job Listing',
+                tabBarLabel: t('bottom_navigation.job_listings'),
                 tabBarIcon: ({focused}) => (
                   <HambergerMenu size="24" color="#000000" />
                 ),
@@ -65,13 +69,13 @@ function App(): React.JSX.Element {
             <Tab.Screen
               name="AppliedJobScreen"
               component={AppliedJobScreen}
-              options={{tabBarLabel: 'Applied Jobs'}}
+              options={{tabBarLabel: t('bottom_navigation.applied_jobs')}}
             />
             <Tab.Screen
               name="ProfileScreen"
               component={ProfileScreen}
               options={{
-                tabBarLabel: 'Profile',
+                tabBarLabel: t('bottom_navigation.profile'),
                 tabBarIcon: ({focused}) => (
                   <Profile size="24" color="#000000" />
                 ),
