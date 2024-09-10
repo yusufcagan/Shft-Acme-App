@@ -5,8 +5,9 @@ import {
   TouchableOpacity,
   TextInput,
   FlatList,
+  ActivityIndicator,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Logout, SearchNormal1} from 'iconsax-react-native';
 import JobCard from './components/JobCard';
 import {useGetJobList} from '../../../services/queries/useGetJobList';
@@ -17,9 +18,32 @@ import {JobStackParamList} from '../../../RootStackParamList';
 export function JobList({
   navigation,
 }: NativeStackScreenProps<JobStackParamList, 'JobList'>) {
-  const {data: jobData} = useGetJobList();
+  const [page, setPage] = useState<number>(1);
+  const [perPage] = useState<number>(10);
+  const [jobs, setJobs] = useState<any[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string | undefined>('');
+  const [searchField] = useState<string | undefined>('companyName');
+  const {
+    data: jobData,
+    isLoading,
+    isFetching,
+  } = useGetJobList(
+    page,
+    perPage,
+    searchQuery ? searchField : undefined,
+    searchQuery || undefined,
+  );
   const clearTokens = useAuthStore(state => state.clearTokens);
+  const handleLoadMore = () => {
+    if (!isFetching && jobData?.data?.length! > 0) {
+      setPage(prevPage => prevPage + 1);
+    }
+  };
 
+  const handleSearch = (query: string | undefined) => {
+    setSearchQuery(query);
+    setPage(1);
+  };
   return (
     <SafeAreaView className="bg-white-100 flex-1">
       <View className="flex-row justify-between mb-5 m-5">
@@ -34,15 +58,24 @@ export function JobList({
       <View className="bg-gray-200 flex justify-center">
         <View className="m-5 flex-row border border-gray-800 p-2 rounded-md items-center">
           <SearchNormal1 size="14" color="#000000" />
-          <TextInput placeholder="Search" className="ml-2" />
+          <TextInput
+            placeholder="Search"
+            className="ml-2"
+            onChangeText={handleSearch}
+            value={searchQuery}
+          />
         </View>
       </View>
+      {isLoading && <ActivityIndicator size="large" color="#0000ff" />}
       <FlatList
         data={jobData?.data}
         renderItem={({item: job}) => (
           <JobCard job={job} navigation={navigation} />
         )}
         keyExtractor={item => String(item.id!)}
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0.01}
+        ListFooterComponent={isLoading ? <ActivityIndicator /> : null}
       />
     </SafeAreaView>
   );

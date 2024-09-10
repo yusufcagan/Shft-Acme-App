@@ -21,11 +21,24 @@ export type JobResponse = {
   meta: Meta;
 };
 
-export const jobList = async (): Promise<JobResponse> => {
+export const jobList = async (
+  page: number,
+  perPage: number,
+  searchField?: string,
+  searchQuery?: string,
+): Promise<JobResponse> => {
   const token = useAuthStore.getState().accessToken;
   const response = await apiClient.get('/api/jobs', {
     headers: {
       Authorization: `Bearer ${token}`,
+    },
+    params: {
+      page,
+      perPage,
+      search: {
+        field: searchField,
+        query: searchQuery,
+      },
     },
   });
   return response.data;
