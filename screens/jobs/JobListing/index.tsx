@@ -64,7 +64,7 @@ export function JobList({
         <View className="m-5 flex-row border border-gray-800 p-2 rounded-md items-center">
           <SearchNormal1 size="14" color="#000000" />
           <TextInput
-            placeholder="Search"
+            placeholder={t('job_listings_screen.search_placeholder')}
             className="ml-2"
             onChangeText={handleSearch}
             value={searchQuery}
