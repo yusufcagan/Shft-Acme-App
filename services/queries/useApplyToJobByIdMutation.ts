@@ -1,5 +1,5 @@
-import {useMutation, useQuery} from '@tanstack/react-query';
-import {applyJobById, Job} from '../jobService';
+import {useMutation} from '@tanstack/react-query';
+import {applyJobById} from '../jobService';
 
 export const useApplyToJobById = () => {
   return useMutation({

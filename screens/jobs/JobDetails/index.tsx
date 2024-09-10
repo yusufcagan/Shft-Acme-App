@@ -6,6 +6,8 @@ import {JobStackParamList} from '../../../RootStackParamList';
 import {useGetJobById} from '../../../services/queries/useGetJobById';
 import {useApplyToJobById} from '../../../services/queries/useApplyToJobByIdMutation';
 import {useGetUser} from '../../../services/queries/useGetUser';
+import {useWithdrawToJobById} from '../../../services/queries/useWithdrawJobByIdMutation';
+import {useQueryClient} from '@tanstack/react-query';
 
 export function JobDetailScreen({
   navigation,
@@ -18,11 +20,23 @@ export function JobDetailScreen({
   const appliedJobIds = new Set(user?.appliedJobs || []);
 
   const ApplyJob = useApplyToJobById();
+  const WithdrawJob = useWithdrawToJobById();
+  const queryClient = useQueryClient();
 
   const handleApplyJob = () => {
     ApplyJob.mutateAsync(id, {
       onSuccess: () => {
-        console.log('success');
+        queryClient.clear();
+        console.log('success apply');
+      },
+    });
+  };
+
+  const handleWithdrawJob = () => {
+    WithdrawJob.mutateAsync(id, {
+      onSuccess: () => {
+        queryClient.clear();
+        console.log('success withdraw');
       },
     });
   };
@@ -59,7 +73,7 @@ export function JobDetailScreen({
         </View>
         {appliedJobIds.has(job?.id!) ? (
           <TouchableOpacity
-            onPress={handleApplyJob}
+            onPress={handleWithdrawJob}
             className="bg-white p-3 border-2 rounded-md mb-4 w-2/3 items-center">
             <Text className="text-black text-[17px] font-bold mx-2">
               Withdraw

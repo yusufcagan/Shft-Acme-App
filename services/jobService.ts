@@ -50,3 +50,13 @@ export const applyJobById = async (id: string | undefined): Promise<Job> => {
   });
   return response.data;
 };
+
+export const withdeawJobById = async (id: string | undefined): Promise<Job> => {
+  const token = useAuthStore.getState().accessToken;
+  const response = await apiClient.post(`/api/jobs/${id}/withdraw`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
