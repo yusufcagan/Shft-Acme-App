@@ -1,0 +1,63 @@
+{
+  "splash_screen": {
+    "title": "Welcome to ACME"
+  },
+  "welcome_screen": {
+    "welcome_message": "Welcome",
+    "email": "Email",
+    "password": "Password",
+    "login_button": "Login",
+    "signup_button": "Create Account",
+    "no_account_message": "Don’t have an account?"
+  },
+  "create_account_screen": {
+    "title": "Create Account",
+    "email": "Email",
+    "password": "Password",
+    "signup_button": "Sign up"
+  },
+  "job_listings_screen": {
+    "title": "Job Listings",
+    "search_placeholder": "Search",
+    "job_name": "Job Name",
+    "company_name": "Company: ",
+    "salary": "Salary: ",
+    "load_more_button": "Load more"
+  },
+  "job_detail_screen": {
+    "title": "Job Detail",
+    "company": "Company: ",
+    "location": "Location: ",
+    "salary": "Salary: ",
+    "job_name": "Job Name",
+    "keywords": "Keyword: ",
+    "job_description": "Job Description",
+    "apply_button": "Apply",
+    "withdraw_button": "Withdraw"
+  },
+  "applied_jobs_screen": {
+    "title": "Applied Jobs",
+    "job_name": "Job Name",
+    "company_name": "Company: ",
+    "salary": "Salary: "
+  },
+  "profile_screen": {
+    "title": "Profile Detail",
+    "personal_info": "Personal Information",
+    "name": "Name",
+    "surname": "Surname",
+    "profile_image": "Profile Image URL",
+    "phone": "Phone",
+    "dob": "Date of Birth",
+    "address": "Address",
+    "country": "Country",
+    "city": "City",
+    "update_button": "Update",
+    "logout_button": "Logout"
+  },
+  "bottom_navigation": {
+    "job_listings": "Job Listings",
+    "applied_jobs": "Applied Jobs",
+    "profile": "Profile"
+  }
+}

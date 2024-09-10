@@ -1,0 +1,63 @@
+{
+  "splash_screen": {
+    "title": "ACME'ye Hoş Geldiniz"
+  },
+  "welcome_screen": {
+    "welcome_message": "Hoş Geldiniz",
+    "email": "E-posta",
+    "password": "Şifre",
+    "login_button": "Giriş Yap",
+    "signup_button": "Kayıt Ol",
+    "no_account_message": "Hesabınız yok mu?"
+  },
+  "create_account_screen": {
+    "title": "Hesap Oluştur",
+    "email": "E-posta",
+    "password": "Şifre",
+    "signup_button": "Kayıt Ol"
+  },
+  "job_listings_screen": {
+    "title": "İş İlanları",
+    "search_placeholder": "Ara",
+    "job_name": "İş Adı",
+    "company_name": "Şirket: ",
+    "salary": "Maaş: ",
+    "load_more_button": "Daha Fazla Yükle"
+  },
+  "job_detail_screen": {
+    "title": "İş Detayı",
+    "company": "Şirket: ",
+    "location": "Konum: ",
+    "salary": "Maaş: ",
+    "job_name": "İş Adı",
+    "keywords": "Anahtar Kelime: ",
+    "job_description": "İş Tanımı",
+    "apply_button": "Başvur",
+    "withdraw_button": "Başvuruyu Geri Çek"
+  },
+  "applied_jobs_screen": {
+    "title": "Başvurulan İşler",
+    "job_name": "İş Adı",
+    "company_name": "Şirket: ",
+    "salary": "Maaş: "
+  },
+  "profile_screen": {
+    "title": "Profil Detayı",
+    "personal_info": "Kişisel Bilgiler",
+    "name": "Ad",
+    "surname": "Soyad",
+    "profile_image": "Profil Resmi URL",
+    "phone": "Telefon",
+    "dob": "Doğum Tarihi",
+    "address": "Adres",
+    "country": "Ülke",
+    "city": "Şehir",
+    "update_button": "Güncelle",
+    "logout_button": "Çıkış Yap"
+  },
+  "bottom_navigation": {
+    "job_listings": "İş İlanları",
+    "applied_jobs": "Başvurulan İşler",
+    "profile": "Profil"
+  }
+}
