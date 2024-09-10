@@ -10,19 +10,9 @@ import {useGetUser} from '../../services/queries/useGetUser';
 import {Logout} from 'iconsax-react-native';
 import {useAuthStore} from '../../store/authStore';
 import {Controller, useForm} from 'react-hook-form';
+import {useUpdateUser} from '../../services/queries/useUpdateUserMutation';
+import {UpdateUserResponse} from '../../services/userService';
 
-type updateUserResponse = {
-  id: string;
-  name: string;
-  surname: string;
-  profileImage: string;
-  phone: string;
-  dateOfBirth: string;
-  country: string;
-  city: string;
-  address: string;
-  appliedJobs: string[];
-};
 export default function ProfileScreen() {
   const {data: user} = useGetUser();
   const clearTokens = useAuthStore(state => state.clearTokens);
@@ -30,18 +20,27 @@ export default function ProfileScreen() {
     control,
     handleSubmit,
     formState: {errors},
-  } = useForm<updateUserResponse>({
+  } = useForm<UpdateUserResponse>({
     defaultValues: {
       name: user?.name || '',
       surname: user?.surname || '',
       profileImage: user?.profileImage || '',
       phone: user?.phone || '',
       dateOfBirth: user?.dateOfBirth || '',
-      country: user?.address?.country || '',
-      city: user?.address?.city || '',
-      address: user?.address?.details || '',
+      address: {
+        details: user?.address?.details || '',
+        city: user?.address?.city || '',
+        country: user?.address?.country || '',
+      },
     },
   });
+
+  const updateUser = useUpdateUser();
+
+  const onSubmit = (data: UpdateUserResponse) => {
+    updateUser.mutateAsync(data);
+  };
+
   return (
     <SafeAreaView className="flex-1">
       <View className="flex-row justify-between mb-5 m-5">
@@ -137,7 +136,7 @@ export default function ProfileScreen() {
         {/* Country */}
         <Controller
           control={control}
-          name="country"
+          name="address.country"
           render={({field: {onChange, value}}) => (
             <TextInput
               placeholder="Country"
@@ -151,7 +150,7 @@ export default function ProfileScreen() {
         {/* City */}
         <Controller
           control={control}
-          name="city"
+          name="address.city"
           render={({field: {onChange, value}}) => (
             <TextInput
               placeholder="City"
@@ -165,7 +164,7 @@ export default function ProfileScreen() {
         {/* Address */}
         <Controller
           control={control}
-          name="address"
+          name="address.details"
           render={({field: {onChange, value}}) => (
             <TextInput
               placeholder="Address"
@@ -177,7 +176,9 @@ export default function ProfileScreen() {
         />
 
         {/* Update Button */}
-        <TouchableOpacity className="bg-black p-4 rounded mt-4 w-2/3 self-center">
+        <TouchableOpacity
+          onPress={handleSubmit(onSubmit)}
+          className="bg-black p-4 rounded mt-4 w-2/3 self-center">
           <Text className="text-white text-center font-bold">Update</Text>
         </TouchableOpacity>
       </View>
