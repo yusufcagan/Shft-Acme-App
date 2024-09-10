@@ -12,6 +12,8 @@ import {RootStackParamList} from '../../../RootStackParamList';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {ArrowLeft} from 'iconsax-react-native';
 import {useRegisterMutation} from '../../../services/queries/useRegisterMutation';
+import '../../../lang/i18n';
+import {useTranslation} from 'react-i18next';
 
 type RegisterInput = {
   email: string;
@@ -26,6 +28,7 @@ export function CreateAccount({
     handleSubmit,
     formState: {errors},
   } = useForm<RegisterInput>();
+  const {t} = useTranslation();
 
   const {mutate} = useRegisterMutation();
 
@@ -66,11 +69,13 @@ export function CreateAccount({
           <ArrowLeft size="32" color="#000" />
         </TouchableOpacity>
         <Text className="mt-2 text-3xl text-black-900 font-semibold">
-          Create Accounts
+          {t('create_account_screen.title')}
         </Text>
         {/* Email component */}
         <View className="mb-6 mt-10">
-          <Text className="text-lg mb-2">Email</Text>
+          <Text className="text-lg mb-2">
+            {t('create_account_screen.email')}
+          </Text>
           <Controller
             control={control}
             rules={{
@@ -100,7 +105,9 @@ export function CreateAccount({
 
         {/* Password Field */}
         <View className="mb-6">
-          <Text className="text-lg mb-2">Password</Text>
+          <Text className="text-lg mb-2">
+            {t('create_account_screen.password')}
+          </Text>
           <Controller
             control={control}
             rules={{
@@ -132,7 +139,9 @@ export function CreateAccount({
         <TouchableOpacity
           onPress={handleSubmit(onSubmit)}
           className="bg-black py-3 rounded-md mb-4">
-          <Text className="text-white text-center text-lg">Sign up</Text>
+          <Text className="text-white text-center text-lg">
+            {t('create_account_screen.signup_button')}
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

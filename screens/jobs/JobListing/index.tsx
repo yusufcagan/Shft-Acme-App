@@ -14,15 +14,18 @@ import {useGetJobList} from '../../../services/queries/useGetJobList';
 import {useAuthStore} from '../../../store/authStore';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {JobStackParamList} from '../../../RootStackParamList';
+import '../../../lang/i18n';
+import {useTranslation} from 'react-i18next';
 
 export function JobList({
   navigation,
 }: NativeStackScreenProps<JobStackParamList, 'JobList'>) {
   const [page, setPage] = useState<number>(1);
   const [perPage] = useState<number>(10);
-  const [jobs, setJobs] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState<string | undefined>('');
   const [searchField] = useState<string | undefined>('companyName');
+  const {t} = useTranslation();
+
   const {
     data: jobData,
     isLoading,
@@ -52,7 +55,9 @@ export function JobList({
           style={{transform: [{rotate: '-135deg'}]}}>
           <Logout size="30" color="#000000" />
         </TouchableOpacity>
-        <Text className="text-xl text-black-900 font-semibold">Job List</Text>
+        <Text className="text-xl text-black-900 font-semibold">
+          {t('job_listings_screen.title')}
+        </Text>
         <View className="w-[30px]" />
       </View>
       <View className="bg-gray-200 flex justify-center">
