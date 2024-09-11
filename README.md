@@ -38,19 +38,25 @@ npm run android
 Here are some screenshots from the application:
 
 1. Splash Screen
-   ![Job Listings Screen](./screenshots/splash.png)
+   <br/>
+   <img src="./screenshots/splash.png" alt="Splash Screen" width="300"/>
 
 2. Login Screen
-   ![Login Screen](./screenshots/login.png)
+   <br/>
+   <img src="./screenshots/login.png" alt="Login Screen" width="300"/>
 
 3. Job Listings Screen
-   ![Job Listings Screen](./screenshots/JobList.png)
+   <br/>
+   <img src="./screenshots/JobList.png" alt="Job Listings Screen" width="300"/>
 
 4. Job Detail Screen
-   ![Job Listings Screen](./screenshots/JobDetail.png)
+   <br/>
+   <img src="./screenshots/JobDetail.png" alt="Job Detail Screen" width="300"/>
 
 5. Applied Job Screen
-   ![Job Listings Screen](./screenshots/appliedJob.png)
+   <br/>
+   <img src="./screenshots/appliedJob.png" alt="Applied Job Screen" width="300"/>
 
 6. Profile Screen
-   ![Profile Screen](/screenshots/profile.png)
+   <br/>
+   <img src="./screenshots/profile.png" alt="Profile Screen" width="300"/>
