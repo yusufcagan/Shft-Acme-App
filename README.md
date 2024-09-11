@@ -1,6 +1,6 @@
 # ACME APP SHFT React Native Application
 
-This project is a "Job Finder" app that allows users to search, filter, and apply for job listings.
+This project is a "Job Finder" app that allows users to search, and apply for job listings.
 
 ## Installation
 
